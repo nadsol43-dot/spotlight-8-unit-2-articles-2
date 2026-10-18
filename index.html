@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Articles: A/An & The</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            background: transparent;
+        }
+
+        .tab:hover {
+            background: #e9ecef;
+        }
+
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+            min-height: 500px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .rule-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .rule-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .rule-card.an-card {
+            border-left-color: #28a745;
+        }
+
+        .rule-card.the-card {
+            border-left-color: #dc3545;
+        }
+
+        .rule-card.no-card {
+            border-left-color: #6c757d;
+        }
+
+        .rule-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .rule-description {
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        .examples {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .example {
+            font-style: italic;
+            color: #667eea;
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .example .highlight-a {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .example .highlight-the {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .example .highlight-no {
+            color: #6c757d;
+            font-weight: bold;
+            text-decoration: line-through;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #495057;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .category-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .exception-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .exception-box strong {
+            color: #856404;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            line-height: 1.6;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 2px;
+        }
+
+        .badge-a {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-the {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-no {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #0c5460;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 English Articles</h1>
+            <p>A/An (Indefinite) & The (Definite) - Complete Guide</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('a-an')">A/An</button>
+            <button class="tab" onclick="showTab('the')">The</button>
+            <button class="tab" onclick="showTab('no-article')">No Article</button>
+            <button class="tab" onclick="showTab('comparison')">Comparison</button>
+        </div>
+
+        <div class="content">
+            <!-- A/AN TAB -->
+            <div id="a-an" class="tab-content active">
+                <h2 style="color: #28a745; margin-bottom: 30px;">🟢 A/An - Indefinite Article</h2>
+
+                <div class="rule-card an-card">
+                    <div class="rule-title">1. First Mention / Unknown Items</div>
+                    <div class="rule-description">
+                        Used with singular countable nouns for things not mentioned before or unknown to the listener.
+                    </div>
+                    <div class="examples">
+                        <div class="example">I saw <span class="highlight-a">a</span> dog chasing cars on the street.</div>
+                        <div class="example">Could you give me <span class="highlight-a">an</span> apple?</div>
+                    </div>
+                </div>
+
+                <div class="rule-card an-card">
+                    <div class="rule-title">2. Meaning "One"</div>
+                    <div class="rule-description">
+                        Can be used to mean "one" or "a single".
+                    </div>
+                    <div class="examples">
+                        <div class="example">I need <span class="highlight-a">a</span> minute to think.</div>
+                    </div>
+                </div>
+
+                <div class="rule-card an-card">
+                    <div class="rule-title">3. Meaning "Per/Every/Each"</div>
+                    <div class="rule-description">
+                        Used instead of "per", "for every", or "each".
+                    </div>
+                    <div class="examples">
+                        <div class="example">George calls me three times <span class="highlight-a">a</span> day.</div>
+                        <div class="example">60 km <span class="highlight-a">an</span> hour</div>
+                        <div class="example">10 miles <span class="highlight-a">a</span> litre</div>
+                        <div class="example">Once <span class="highlight-a">a</span> week</div>
+                    </div>
+                </div>
+
+                <div class="rule-card an-card">
+                    <div class="rule-title">4. Special Uses</div>
+                    <div class="rule-description">
+                        Used with names, currency, fractions, measurements, and some diseases.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Currency: <span class="highlight-a">a</span> pound, <span class="highlight-a">a</span> dollar</div>
+                        <div class="example">Fractions: <span class="highlight-a">a</span> third, <span class="highlight-a">a</span> half</div>
+                        <div class="example">Measurements: <span class="highlight-a">a</span> mile, <span class="highlight-a">a</span> kilo</div>
+                        <div class="example">Diseases: <span class="highlight-a">a</span> cold, <span class="highlight-a">a</span> fever, <span class="highlight-a">a</span> headache</div>
+                    </div>
+                    <div class="exception-box">
+                        <strong>️ Exception:</strong> NOT used with flu, pneumonia, tonsillitis, etc.
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Remember:</strong> Use "a" before consonant sounds and "an" before vowel sounds (a university, an hour)
+                </div>
+            </div>
+
+            <!-- THE TAB -->
+            <div id="the" class="tab-content">
+                <h2 style="color: #dc3545; margin-bottom: 30px;">🔴 The - Definite Article</h2>
+
+                <div class="rule-card the-card">
+                    <div class="rule-title">1. Previously Mentioned / Known</div>
+                    <div class="rule-description">
+                        Used with nouns (singular/plural, countable/uncountable) when already mentioned or clear from context.
+                    </div>
+                    <div class="examples">
+                        <div class="example">The book that I borrowed from you is interesting.</div>
+                        <div class="example">Pete found <span class="highlight-the">a</span> kitten in the park. He took <span class="highlight-the">the</span> kitten home with him.</div>
+                    </div>
+                </div>
+
+                <div class="rule-card the-card">
+                    <div class="rule-title">2. NOT Used with Plural Groups</div>
+                    <div class="rule-description">
+                        The is NEVER used before plural nouns representing a general group.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Cars did not exist two hundred years ago.</div>
+                        <div class="example"><span class="highlight-no">The cars</span> did not exist two hundred years ago. ❌</div>
+                    </div>
+                </div>
+
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-title">🌍 Unique Objects</div>
+                        <ul class="category-list">
+                            <li>the moon, the sky, the Sun</li>
+                            <li>the Earth, the universe</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title"> Theaters & Cinemas</div>
+                        <ul class="category-list">
+                            <li>the Regent Theatre</li>
+                            <li>the Apollo</li>
+                            <li>the Odeon</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title"> Hotels & Restaurants</div>
+                        <ul class="category-list">
+                            <li>the Savoy</li>
+                            <li>the Atrium</li>
+                            <li>the Ritz</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">️ Museums & Galleries</div>
+                        <ul class="category-list">
+                            <li>the Louvre</li>
+                            <li>the Tretyakov Art Gallery</li>
+                            <li>the British Museum</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">📰 Newspapers & Magazines</div>
+                        <ul class="category-list">
+                            <li>the Times of London</li>
+                            <li>the New Yorker</li>
+                            <li>the Guardian</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">🌊 Rivers, Seas & Oceans</div>
+                        <ul class="category-list">
+                            <li>the Thames</li>
+                            <li>the Mediterranean Sea</li>
+                            <li>the Pacific Ocean</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">⛰️ Mountain Ranges</div>
+                        <ul class="category-list">
+                            <li>the Himalayas</li>
+                            <li>the Alps</li>
+                            <li>the Rockies</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">🏝️ Island Groups</div>
+                        <ul class="category-list">
+                            <li>the Bahamas</li>
+                            <li>the Channel Islands</li>
+                            <li>the Solomon Islands</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">🏜️ Deserts</div>
+                        <ul class="category-list">
+                            <li>the Kalahari Desert</li>
+                            <li>the Sahara</li>
+                            <li>the Gobi</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">🎵 Musical Instruments</div>
+                        <ul class="category-list">
+                            <li>to play the guitar</li>
+                            <li>to play the violin</li>
+                            <li>to play the piano</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">👨‍‍👧 Family Names</div>
+                        <ul class="category-list">
+                            <li>the Jacksons (the family)</li>
+                            <li>the Smiths</li>
+                            <li>the Johnsons</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-title">👑 Heads of State</div>
+                        <ul class="category-list">
+                            <li>the President</li>
+                            <li>the Queen of Spain</li>
+                            <li>the Prime Minister</li>
+                        </ul>
+                        <div class="exception-box" style="margin-top: 10px;">
+                            <strong>️ Exception:</strong> NOT with proper names (King Henry VIII) or job titles (He became president of the company)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rule-card the-card" style="margin-top: 30px;">
+                    <div class="rule-title">3. Adjectives as Plural Nouns</div>
+                    <div class="rule-description">
+                        Used with adjectives to represent categories of people.
+                    </div>
+                    <div class="examples">
+                        <div class="example"><span class="highlight-the">the</span> young, <span class="highlight-the">the</span> deaf, <span class="highlight-the">the</span> poor</div>
+                    </div>
+                </div>
+
+                <div class="rule-card the-card">
+                    <div class="rule-title">4. Historical Events</div>
+                    <div class="rule-description">
+                        Used with historical references and events.
+                    </div>
+                    <div class="examples">
+                        <div class="example"><span class="highlight-the">the</span> Hundred Years' War</div>
+                        <div class="example"><span class="highlight-the">the</span> Chinese Cultural Revolution</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NO ARTICLE TAB -->
+            <div id="no-article" class="tab-content">
+                <h2 style="color: #6c757d; margin-bottom: 30px;">⚫ No Article</h2>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">1. Personal Names</div>
+                    <div class="rule-description">
+                        No article before personal names.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Celia, Nathan, John, Mary</div>
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">2. Sports, Games, Days, Months, Holidays</div>
+                    <div class="rule-description">
+                        No article before names of sports, games, days of the week, months, holidays, colors, drinks, dishes, and languages.
+                    </div>
+                    <div class="examples">
+                        <div class="example">He's good at basketball.</div>
+                        <div class="example">She speaks Italian very well.</div>
+                        <div class="example">Monday, January, Christmas, red, coffee, pasta</div>
+                    </div>
+                    <div class="exception-box">
+                        <strong>⚠️ Exception:</strong> Use "the" if followed by "language" (the Italian language)
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">3. Countries, Cities, Streets, Parks</div>
+                    <div class="rule-description">
+                        No article before most place names.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Countries: Russia, Australia, France</div>
+                        <div class="example">Cities: Milan, London, Paris</div>
+                        <div class="example">Streets: Smith Street, Oxford Street</div>
+                        <div class="example">Parks: Hyde Park, Central Park</div>
+                        <div class="example">Continents: Asia, Europe, Africa</div>
+                        <div class="example">Lakes: Lake Michigan, Lake Baikal</div>
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">4. Individual Mountains & Islands</div>
+                    <div class="rule-description">
+                        No article before single mountains or islands (but use "the" for ranges/groups).
+                    </div>
+                    <div class="examples">
+                        <div class="example">Mount Etna, Mount Everest</div>
+                        <div class="example">Tasmania, Malta, Sicily</div>
+                    </div>
+                    <div class="exception-box">
+                        <strong>⚠️ Exception:</strong> Lake Baikal → <span class="highlight-the">the</span> Baikal
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">5. Names with Personal Names</div>
+                    <div class="rule-description">
+                        No article when two-word names start with a personal name or place name.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Victoria Station, Moscow University</div>
+                    </div>
+                    <div class="exception-box">
+                        <strong>⚠️ Exception:</strong> <span class="highlight-the">the</span> Black Swan Hotel
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">6. Businesses Named After Founders</div>
+                    <div class="rule-description">
+                        No article for shops, restaurants, hotels, banks named after founders ending in -s or -'s.
+                    </div>
+                    <div class="examples">
+                        <div class="example">Barclays Bank, Brown's Hotel, Selfridges</div>
+                    </div>
+                </div>
+
+                <div class="rule-card no-card">
+                    <div class="rule-title">7. Institutions (Purpose vs. Building)</div>
+                    <div class="rule-description">
+                        No article when referring to the purpose/function of school, university, college, court, hospital, prison, church, bed.
+                    </div>
+                    <div class="examples">
+                        <div class="example">He's been in hospital for two weeks. (as a patient)</div>
+                    </div>
+                    <div class="exception-box">
+                        <strong>⚠️ Exception:</strong> Use "the" when referring to the building: They've taken him to <span class="highlight-the">the</span> hospital near his house.
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARISON TAB -->
+            <div id="comparison" class="tab-content">
+                <h2 style="color: #667eea; margin-bottom: 30px;"> Quick Comparison</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Situation</th>
+                            <th>A/An</th>
+                            <th>The</th>
+                            <th>No Article</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>First mention</td>
+                            <td><span class="badge badge-a">✓</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Second mention</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-the">✓</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>General plural</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-a">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Unique objects</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-the">✓</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Personal names</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-a">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Countries/Cities</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-a">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Rivers/Oceans</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-the">✓</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Meals</td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-a">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Meaning "per"</td>
+                            <td><span class="badge badge-a">✓</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                            <td><span class="badge badge-no">✗</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box" style="margin-top: 30px;">
+                    <strong>🎯 Key Rule:</strong> 
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>A/An</strong> = any one (not specific)</li>
+                        <li><strong>The</strong> = that specific one (we know which)</li>
+                        <li><strong>No article</strong> = general/plural/proper names</li>
+                    </ul>
+                </div>
+
+                <div class="rule-card" style="margin-top: 30px;">
+                    <div class="rule-title"> Practice Examples</div>
+                    <div class="examples">
+                        <div class="example">I saw <span class="highlight-a">a</span> dog. <span class="highlight-the">The</span> dog was barking.</div>
+                        <div class="example">She plays <span class="highlight-the">the</span> piano very well.</div>
+                        <div class="example">He's good at <span class="highlight-no">Ø</span> basketball.</div>
+                        <div class="example">We visited <span class="highlight-the">the</span> Louvre in Paris.</div>
+                        <div class="example">They live in <span class="highlight-no">Ø</span> Russia.</div>
+                        <div class="example">I need <span class="highlight-a">a</span> coffee. (one coffee)</div>
+                        <div class="example">The train goes 100 km <span class="highlight-a">an</span> hour.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.rule-card, .category-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
